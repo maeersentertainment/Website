@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Support | Maeers Entertainment</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
+</head>
+<body>
+
+    <!-- NAVBAR -->
+    <nav>
+        <div class="logo">Maeers Entertainment</div>
+        <ul>
+            <li><a href="index.html">Home</a></li>
+
+            <li><a href="support.html">Support</a></li>
+            <li><a href="events.html">Events</a></li>
+
+            <!-- AUTH BUTTONS -->
+            <li class="nav-auth">
+                <a href="login.html" class="btn-auth btn-auth-outline">Log In</a>
+            </li>
+            <li>
+                <a href="signup.html" class="btn-auth btn-auth-filled">Sign Up</a>
+            </li>
+        </ul>
+    </nav>
+
+    <!-- SUPPORT CONTENT -->
+    <main class="support-main">
+        <section class="support-hero">
+            <h1>Player Support</h1>
+            <p>Find answers for each game below, or contact us directly.</p>
+        </section>
+
+        <!-- FAQ SECTION (DROPDOWNS) -->
+        <section class="support-section">
+            <h2>FAQs</h2>
+
+            <div class="faq-accordion">
+                <!-- Age of Az'Kov FIRST -->
+                <article class="faq-item">
+                    <button class="faq-toggle" type="button">
+                        <span class="faq-title">Age of Az'Kov</span>
+                        <span class="faq-icon">+</span>
+                    </button>
+                    <div class="faq-content">
+                        <ul>
+                            <li>
+                                <strong>Can you play interrupts at anytime?</strong><br>
+                                Yes, you can play interrupts at anytime during the game.
+                            </li>
+                            <li>
+                                <strong>When playing a field spell does it destory your opponents field spell?</strong><br>
+                                No. Thier field spell stays on the field when you play a field spell.
+                            </li>
+                            <li>
+                                <strong>What happens if I have no pages left in my grimore and I can't draw?</strong><br>
+                                The player that has no pages left in thier grimore loses the game. 
+                            </li>
+                        </ul>
+                    </div>
+                </article>
+
+                <!-- Reboot: Speedrunner SECOND -->
+                <article class="faq-item">
+                    <button class="faq-toggle" type="button">
+                        <span class="faq-title">Reboot: Speedrunner</span>
+                        <span class="faq-icon">+</span>
+                    </button>
+                    <div class="faq-content">
+                        <ul>
+                            <li>
+                                <strong>How are leaderboards calculated?</strong><br>
+                                Times are recorded when you complete the full speedrun.
+                            </li>
+                            <li>
+                                <strong>My run didn’t save. What do I do?</strong><br>
+                                Check your connection, then restart the game and try another run. If it keeps happening, contact us below.
+                            </li>
+                            <li>
+                                <strong>Can I use a controller?</strong><br>
+                                No. Reboot does not support controller.
+                            </li>
+                        </ul>
+                    </div>
+                </article>
+
+                <!-- Account & General THIRD -->
+                <article class="faq-item">
+                    <button class="faq-toggle" type="button">
+                        <span class="faq-title">Account & General</span>
+                        <span class="faq-icon">+</span>
+                    </button>
+                    <div class="faq-content">
+                        <ul>
+                            <li>
+                                <strong>How do I report a bug?</strong><br>
+                                Use the contact form below and include as many details as possible (platform, steps to reproduce, screenshots).
+                            </li>
+                            <li>
+                                <strong>Where can I give feedback?</strong><br>
+                                Join our community discord or send feedback directly through the form below.
+                            </li>
+                            <li>
+                                <strong>Do you offer refunds?</strong><br>
+                                Refunds are handled through the store where you purchased the game, subject to their policy.
+                            </li>
+                        </ul>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+        <!-- CONTACT FORM -->
+        <section class="support-section">
+            <h2>Contact Support</h2>
+            <p class="support-subtitle">Send us a message and we’ll get back to you.</p>
+
+            <form class="support-form" action="#" method="post">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="support-name">Name</label>
+                        <input type="text" id="support-name" name="name" placeholder="Your name" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="support-email">Email</label>
+                        <input type="email" id="support-email" name="email" placeholder="you@example.com" required>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="support-message">Message</label>
+                    <textarea id="support-message" name="message" rows="5" placeholder="Describe your issue or question..." required></textarea>
+                </div>
+
+                <button type="submit" class="support-submit">Submit</button>
+            </form>
+        </section>
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="site-footer">
+        <div class="footer-top">
+            <!-- LEFT SIDE: site/legal links -->
+            <div class="footer-links footer-links-primary">
+                <a href="legal.html" class="footer-pill">Legal</a>
+                <a href="leadership.html" class="footer-pill">Leadership</a>
+                <a href="terms.html" class="footer-pill">Terms of Service</a>
+                <a href="privacy.html" class="footer-pill">Privacy Notice</a>
+                <a href="support.html" class="footer-pill">Player Support</a>
+                <a href="accessibility.html" class="footer-pill">Accessibility</a>
+                <a href="careers.html" class="footer-pill">Careers</a>
+            </div>
+
+            <!-- RIGHT SIDE: social links -->
+            <div class="footer-links footer-links-social">
+                <a href="https://x.com" target="_blank" class="footer-pill">X</a>
+                <a href="https://instagram.com" target="_blank" class="footer-pill">Instagram</a>
+                <a href="https://tiktok.com" target="_blank" class="footer-pill">TikTok</a>
+                <a href="https://facebook.com" target="_blank" class="footer-pill">Facebook</a>
+                <a href="https://youtube.com" target="_blank" class="footer-pill">YouTube</a>
+                <a href="https://linkedin.com" target="_blank" class="footer-pill">LinkedIn</a>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p>&copy; 2025 Maeers Entertainment. All rights reserved.</p>
+        </div>
+    </footer>
+
+</body>
+</html>

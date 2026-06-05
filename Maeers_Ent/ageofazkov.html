@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Maeers Entertainment</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
+    <script src="stats.js" defer></script>
+</head>
+<body>
+
+    <!-- NAVBAR -->
+    <nav>
+        <div class="logo">Maeers Entertainment</div>
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="rules.html">Rules</a></li>
+            <li><a href="community.html">Patch Notes</a></li>
+
+            <!-- PRODUCTS DROPDOWN -->
+            <li class="dropdown">
+                <a href="#" class="dropdown-toggle">Products</a>
+                <div class="dropdown-menu">
+                    <div class="dropdown-list">
+                        <p class="dropdown-label">Available Now</p>
+                        <a href="products-available.html" class="dropdown-link">
+                            N/A
+                        </a>
+
+                        <p class="dropdown-label">Coming Soon</p>
+                        <a href="products-comingsoon.html" class="dropdown-link">
+                            Age of Az'Kov
+                        </a>
+                    </div>
+                </div>
+            </li>
+
+            <!----<li><a href="game.html">Draft Simulator</a></li>----->
+
+            <!-- NEW: DATABASE BUTTON -->
+            <li><a href="database.html">Database</a></li>
+
+            <li><a href="community.html">Lore</a></li>
+            <li><a href="events.html">Events</a></li>
+
+            <!-- AUTH BUTTONS (TOP RIGHT) -->
+            <li class="nav-auth">
+                <a href="login.html" class="btn-auth btn-auth-outline">Log In</a>
+            </li>
+            <li>
+                <a href="signup.html" class="btn-auth btn-auth-filled">Sign Up</a>
+            </li>
+        </ul>
+    </nav>
+    
+    <!-- HERO SLIDESHOW -->
+    <header class="hero">
+        <div class="slider">
+            <!-- Slide 1 – Age of Az'Kov -->
+            <div class="slide slide-aoa active" style="background-image: url('impfullart.png');">
+                <div class="hero-overlay"></div>
+                <div class="hero-content">
+                    <h1>Age of Az'Kov</h1>
+                    <h2>TBA</h2>
+                    <p>Pre-Built Decks</p>
+                    <a href="ageofazkov.html" class="hero-btn">Order Now!</a>
+                </div>
+            </div>
+
+            <!-- Slide 2 – Goblin King -->
+            <div class="slide slide-reboot" style="background-image: url('Goblin_king.jpg');">
+                <div class="hero-overlay"></div>
+                <div class="hero-content">
+                    <h1>Goblin King</h1>
+                    <h2>Power is true within.</h2>
+                    <p>Pre-Built Decks</p>
+                    <a href="ageofazkov.html" class="hero-btn">Order Now!</a>
+                </div>
+            </div>
+
+            <!-- Arrows -->
+            <button class="slider-arrow prev">&#10094;</button>
+            <button class="slider-arrow next">&#10095;</button>
+
+            <!-- Dots -->
+            <div class="slider-dots"></div>
+        </div>
+    </header>
+
+    <!-- WHAT'S NEW SECTION – IMAGE CAROUSEL -->
+    <section class="whats-new">
+        <h2>What’s New</h2>
+        <p class="whats-subtitle">Hover over an update to preview it.</p>
+
+        <div class="whats-carousel">
+            <!-- Scrollable image track -->
+            <div class="whats-track">
+                <div class="whats-item">
+                    <img src="Imp.png" alt="Update 1">
+                </div>
+                <div class="whats-item">
+                    <img src="Squeek_the_Thief.png" alt="Update 2">
+                </div>
+                <div class="whats-item">
+                    <img src="Scalthyr.png" alt="Update 3">
+                </div>
+                <div class="whats-item">
+                    <img src="Sediment_Gargoyle.png" alt="Update 4">
+                </div>
+                <div class="whats-item">
+                    <img src="Sigmund_Hero_of_Valor.png" alt="Update 5">
+                </div>
+                <!-- Add/remove items as needed -->
+            </div>
+        </div>
+    </section>
+    
+    <!-- FOOTER -->
+    <footer class="site-footer">
+        <div class="footer-top">
+            <!-- LEFT SIDE: site/legal links -->
+            <div class="footer-links footer-links-primary">
+                <a href="legal.html" class="footer-pill">Legal</a>
+                <a href="leadership.html" class="footer-pill">Leadership</a>
+                <a href="terms.html" class="footer-pill">Terms of Service</a>
+                <a href="privacy.html" class="footer-pill">Privacy Notice</a>
+                <a href="support.html" class="footer-pill">Player Support</a>
+                <a href="accessibility.html" class="footer-pill">Accessibility</a>
+                <a href="careers.html" class="footer-pill">Careers</a>
+            </div>
+
+            <!-- RIGHT SIDE: social links -->
+            <div class="footer-links footer-links-social">
+                <a href="https://x.com" target="_blank" class="footer-pill">X</a>
+                <a href="https://instagram.com" target="_blank" class="footer-pill">Instagram</a>
+                <a href="https://tiktok.com" target="_blank" class="footer-pill">TikTok</a>
+                <a href="https://facebook.com" target="_blank" class="footer-pill">Facebook</a>
+                <a href="https://youtube.com" target="_blank" class="footer-pill">YouTube</a>
+                <a href="https://linkedin.com" target="_blank" class="footer-pill">LinkedIn</a>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p>&copy; 2025 Maeers Entertainment. All rights reserved.</p>
+        </div>
+    </footer>
+
+</body>
+</html>

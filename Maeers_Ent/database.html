@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Card Database | Maeers Entertainment</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
+</head>
+<body>
+
+
+    <nav>
+        <div class="logo">Maeers Entertainment</div>
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="rules.html">Rules</a></li>
+            <li><a href="community.html">Patch Notes</a></li>
+
+
+            <li class="dropdown">
+                <a href="#" class="dropdown-toggle">Products</a>
+                <div class="dropdown-menu">
+                    <div class="dropdown-list">
+                        <p class="dropdown-label">Available Now</p>
+                        <a href="products-available.html" class="dropdown-link">N/A</a>
+
+                        <p class="dropdown-label">Coming Soon</p>
+                        <a href="products-comingsoon.html" class="dropdown-link">Age of Az'Kov</a>
+                    </div>
+                </div>
+            </li>
+
+            <li><a href="game.html">Draft Simulator</a></li>
+            <li><a href="database.html">Database</a></li>
+            <li><a href="community.html">Lore</a></li>
+            <li><a href="community.html">News</a></li>
+
+ 
+            <li class="nav-auth">
+                <a href="login.html" class="btn-auth btn-auth-outline">Log In</a>
+            </li>
+            <li>
+                <a href="signup.html" class="btn-auth btn-auth-filled">Sign Up</a>
+            </li>
+        </ul>
+    </nav>
+
+    <main class="db-main">
+        <section class="db-header">
+            <h1>Age of Az'Kov Database</h1>
+            <p>Search revealed cards by name, cost, or rules text.</p>
+
+            <input
+                type="text"
+                id="card-search"
+                class="db-search"
+                placeholder="Search cards..."
+                autocomplete="off"
+            >
+        </section>
+
+        <section class="db-results">
+            <div id="card-grid" class="card-grid">
+
+            </div>
+        </section>
+    </main>
+
+
+    <footer class="site-footer">
+        <div class="footer-top">
+            <div class="footer-links footer-links-primary">
+                <a href="legal.html" class="footer-pill">Legal</a>
+                <a href="leadership.html" class="footer-pill">Leadership</a>
+                <a href="terms.html" class="footer-pill">Terms of Service</a>
+                <a href="privacy.html" class="footer-pill">Privacy Notice</a>
+                <a href="support.html" class="footer-pill">Player Support</a>
+                <a href="accessibility.html" class="footer-pill">Accessibility</a>
+                <a href="careers.html" class="footer-pill">Careers</a>
+            </div>
+
+            <div class="footer-links footer-links-social">
+                <a href="https://x.com" target="_blank" class="footer-pill">X</a>
+                <a href="https://instagram.com" target="_blank" class="footer-pill">Instagram</a>
+                <a href="https://tiktok.com" target="_blank" class="footer-pill">TikTok</a>
+                <a href="https://facebook.com" target="_blank" class="footer-pill">Facebook</a>
+                <a href="https://youtube.com" target="_blank" class="footer-pill">YouTube</a>
+                <a href="https://linkedin.com" target="_blank" class="footer-pill">LinkedIn</a>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p>&copy; 2025 Maeers Entertainment. All rights reserved.</p>
+        </div>
+    </footer>
+
+</body>
+</html>

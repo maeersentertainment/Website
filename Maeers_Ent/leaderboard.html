@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Age of Az'Kov - Leaderboards</title>
+    <!-- Use your main style file (the one with nav/hero/support/db styles) -->
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
+</head>
+<body>
+
+    <!-- NAVBAR -->
+    <nav>
+        <div class="logo">Maeers Entertainment</div>
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="rules.html">Rules</a></li>
+            <li><a href="leaderboard.html">Leaderboards</a></li>
+            <li><a href="support.html">Support</a></li>
+        </ul>
+    </nav>
+
+    <!-- HERO / PAGE HEADER -->
+    <header class="hero">
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+            <h1>Reboot: Global Leaderboards</h1>
+            <p>Track every rank from #1 and beyond across all players and modes.</p>
+        </div>
+    </header>
+
+    <!-- MAIN LEADERBOARD AREA -->
+    <main class="db-main">
+
+        <section class="support-section leaderboard-section">
+            <div class="db-header">
+                <h1>Rankings</h1>
+                <p>
+                </p>
+            </div>
+
+            <!-- Filters / Search -->
+            <div class="lb-filters" style="display:flex; gap:12px; flex-wrap:wrap; align-items:center; margin:10px 0 18px;">
+                <input
+                    type="text"
+                    id="lb-search"
+                    class="db-search"
+                    placeholder="Search by player name..."
+                >
+
+                <select id="lb-mode-filter" class="db-search" style="max-width:220px;">
+                    <option value="">All Modes</option>
+                    <option value="speedrun">Speedrun</option>
+                </select>
+            </div>
+
+            <!-- Paging controls -->
+            <div class="lb-controls" style="display:flex; align-items:center; gap:10px; margin-bottom:16px;">
+                <button id="lb-prev" class="support-submit" type="button">Previous</button>
+                <span id="lb-page-label" style="font-size:14px; color:#c7cbe4;">Page 1</span>
+                <button id="lb-next" class="support-submit" type="button">Next</button>
+            </div>
+
+            <!-- Leaderboard table -->
+            <div class="lb-table-wrapper" style="overflow-x:auto; border-radius:14px; border:1px solid rgba(245,182,56,0.25); background:rgba(7,10,19,0.96);">
+                <table class="lb-table" style="width:100%; border-collapse:collapse; font-size:14px;">
+                    <thead>
+                        <tr style="background:rgba(12,15,26,0.98);">
+                            <th style="text-align:left; padding:10px 12px;">Rank</th>
+                            <th style="text-align:left; padding:10px 12px;">Player</th>
+                            <th style="text-align:left; padding:10px 12px;">Score</th>
+                            <th style="text-align:left; padding:10px 12px;">Mode</th>
+                            <th style="text-align:left; padding:10px 12px;">Last Updated</th>
+                        </tr>
+                    </thead>
+                    <tbody id="lb-body">
+                        <!-- Filled by script.js (setupLeaderboard) -->
+                        <tr>
+                            <td colspan="5" class="db-empty">
+                                Loading leaderboard…
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Small note -->
+            <p style="margin-top:10px; font-size:12px; color:#9da1bc;">
+                Note: In-game scores are pushed from the Unreal game to our servers and reflected here.
+            </p>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <div class="footer-top">
+            <div class="footer-links footer-links-primary">
+                <a href="legal.html" class="footer-pill">Legal</a>
+                <a href="leadership.html" class="footer-pill">Leadership</a>
+                <a href="terms.html" class="footer-pill">Terms of Service</a>
+                <a href="privacy.html" class="footer-pill">Privacy Notice</a>
+                <a href="support.html" class="footer-pill">Player Support</a>
+                <a href="accessibility.html" class="footer-pill">Accessibility</a>
+                <a href="careers.html" class="footer-pill">Careers</a>
+            </div>
+
+            <div class="footer-links footer-links-social">
+                <a href="https://x.com" target="_blank" class="footer-pill">X</a>
+                <a href="https://instagram.com" target="_blank" class="footer-pill">Instagram</a>
+                <a href="https://tiktok.com" target="_blank" class="footer-pill">TikTok</a>
+                <a href="https://facebook.com" target="_blank" class="footer-pill">Facebook</a>
+                <a href="https://youtube.com" target="_blank" class="footer-pill">YouTube</a>
+                <a href="https://linkedin.com" target="_blank" class="footer-pill">LinkedIn</a>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p>&copy; 2025 Maeers Entertainment. All rights reserved.</p>
+        </div>
+    </footer>
+
+</body>
+</html>

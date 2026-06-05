@@ -1,0 +1,201 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Thomas Drafting Sim</title>
+  <style>
+    :root{
+      --bg:#0b0f14;--panel:#111823;--muted:#8aa0b5;--text:#e9f3ff;--accent:#5cc8ff;--warn:#ffca57;--danger:#ff6b6b;
+      --card:#0f1622;--card-border:#1c2635;--btn:#182334;--btn-hover:#213149;--ring:0 0 0 2px rgba(92,200,255,.25);
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{margin:0;background:linear-gradient(180deg,#0a0e13 0%,#0b1119 100%);color:var(--text);font:14px/1.4 system-ui,Segoe UI,Roboto,Ubuntu,"Helvetica Neue",Arial}
+    .app{max-width:1200px;margin:0 auto;padding:24px}
+    header{display:flex;align-items:center;gap:16px;margin-bottom:16px}
+    header h1{font-weight:700;font-size:20px;margin:0}
+    .grid{display:grid;gap:16px}
+    .cols-3{grid-template-columns:280px 1fr 320px}
+    @media (max-width:1100px){.cols-3{grid-template-columns:1fr}}
+    .panel{background:var(--panel);border:1px solid #162233;border-radius:14px;box-shadow:0 10px 40px rgba(0,0,0,.25)}
+    .panel h2{font-size:14px;letter-spacing:.3px;font-weight:700;margin:0;padding:14px 16px;border-bottom:1px solid #1b283d;color:#b8c7da}
+    .panel .body{padding:14px 16px}
+    .row{display:flex;gap:10px;flex-wrap:wrap}
+    .row>*{flex:1}
+    .stack{display:flex;flex-direction:column;gap:10px}
+    label{display:block;font-size:12px;color:var(--muted);margin-bottom:6px}
+    input[type=number]{width:100%;padding:10px 12px;border-radius:10px;border:1px solid #20314b;background:var(--btn);color:var(--text);outline:none}
+    input[type=number]:focus{box-shadow:var(--ring);border-color:#2a436b}
+    button{appearance:none;border:1px solid #264066;background:var(--btn);color:var(--text);padding:10px 14px;border-radius:10px;cursor:pointer;transition:.15s ease;box-shadow:0 1px 0 rgba(255,255,255,.03) inset}
+    button:hover{background:var(--btn-hover);transform:translateY(-1px)}
+    button:active{transform:translateY(0)}
+    .btn-accent{background:linear-gradient(90deg,#532bb0,#2aa6ff);border-color:#2aa6ff}
+    .btn-danger{background:linear-gradient(90deg,#ec6308,#970101);border-color:#970101}
+    /* Cards */
+    .cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:12px}
+    .card{position:relative;background:linear-gradient(180deg,#0f1622,#0c1522);border:1px solid var(--card-border);border-radius:12px;overflow:hidden}
+    .card .pad{padding:10px}
+    .card .name{font-weight:700;margin:2px 0 6px;font-size:14px}
+    .tag{font-size:11px;color:#a9bdd2;border:1px solid #26354a;background:#0e1520;border-radius:6px;padding:2px 6px;display:inline-flex;gap:6px;align-items:center}
+    .rar{position:absolute;top:8px;right:8px;font-size:11px;padding:2px 6px;border-radius:999px;border:1px solid #2b3d59;background:#0e1726;color:#c9def5}
+    .rar.C{color:#d0e7ff}
+    .rar.U{color:#9dff7a;border-color:#385a30;background:#0e2213}
+    .rar.R{color:#ffd36b;border-color:#5a4a2e;background:#241a07}
+    .rar.M{color:#ff9dd6;border-color:#523454;background:#1c0f1a}
+    .card .desc{font-size:12px;color:#b4c6d8;min-height:38px}
+    .card footer{display:flex;justify-content:space-between;align-items:center;padding:8px 10px;border-top:1px solid #1a2536;background:#0d1521}
+    .card button{width:100%}
+    .empty{opacity:.7;border:1px dashed #2a3953;border-radius:12px;padding:18px;text-align:center}
+    .muted{color:var(--muted)}
+    .log{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:12px;line-height:1.45;color:#b9cbe0;max-height:200px;overflow:auto;background:#0c121b;border:1px solid #182236;padding:10px;border-radius:10px}
+    .footer{margin-top:16px;display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+  </style>
+</head>
+<body>
+  <div class="app">
+    <header>
+      <h1>Thomas Drafting Sim :p</h1>
+    </header>
+
+    <section class="grid cols-3">
+      <div class="panel" id="setup">
+        <h2>Draft Setup</h2>
+        <div class="body stack">
+          <div class="row">
+            <div>
+              <label>Players</label>
+              <input type="number" id="players" min="2" max="12" value="8" />
+            </div>
+            <div>
+              <label>Packs Per Player</label>
+              <input type="number" id="packs" min="1" max="6" value="3" />
+            </div>
+            <div>
+              <label>Cards Per Pack</label>
+              <input type="number" id="packSize" min="5" max="20" value="15" />
+            </div>
+          </div>
+          <div class="row">
+            <button id="start" class="btn-accent">Start Draft</button>
+            <button id="reset" class="btn-danger">Reset Draft</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="panel" id="draft">
+        <h2>Current Pack</h2>
+        <div class="body">
+          <div id="packArea" class="cards"></div>
+          <div id="emptyPack" class="empty" style="display:none"></div>
+          <div class="footer">
+            <span id="status" class="muted"></span>
+            <div style="flex:1"></div>
+            <button id="skipBtn">Skip</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="panel">
+        <h2>Your Picks</h2>
+        <div class="body stack">
+          <div id="picks" class="cards"></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="panel" style="margin-top:16px">
+      <h2>Log</h2>
+      <div class="body stack">
+        <div id="tableInfo" class="muted"></div>
+        <div id="log" class="log"></div>
+      </div>
+    </section>
+  </div>
+
+<script>
+(() => {
+
+  const $ = s => document.querySelector(s);
+  const logEl = $('#log');
+  const packArea = $('#packArea');
+  const picksArea = $('#picks');
+  const emptyPack = $('#emptyPack');
+  const statusEl = $('#status');
+  const tableInfo = $('#tableInfo');
+  const rnd = n => Math.floor(Math.random()*n);
+  const choice = arr => arr[rnd(arr.length)];
+  const clamp = (n,min,max)=>Math.max(min,Math.min(max,n));
+  const log = msg => { const t=new Date().toLocaleTimeString(); logEl.textContent += `[${t}] ${msg}\n`; logEl.scrollTop = logEl.scrollHeight; };
+  const escapeHtml = s => s.replace(/[&<>"']/g, c=>({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#39;"}[c]));
+
+
+  const COLORS = ['W','U','B','R','G','C'];
+  const TYPES = ['Creature','Spell','Field Spell','Hero'];
+  const RARITIES = ['C','C','C','C','U','U','R','M'];
+  function genCardPool(size=260){
+    const nouns=['Falcon','Mystic','Warden','Inferno','Shade','Titan','Grove','Torrent','Sentinel','Nomad','Cipher','Pyre','Bounty','Vanguard','Oracle','Blossom','Drifter','Machina','Specter','Runes'];
+    const adjs=['Silent','Verdant','Arcane','Crimson','Gilded','Sable','Azure','Ivory','Obsidian','Howling','Ancient','Shimmering','Stormbound','Dawn','Dusk'];
+    const pool=[]; for(let i=0;i<size;i++){ const color=choice(COLORS), type=choice(TYPES), rar=choice(RARITIES); const name=`${choice(adjs)} ${choice(nouns)}`; pool.push({id:`C${i}`,name,color,type,rarity:rar,text:rulesFor(type,color,rar)});} return pool;
+  }
+  function rulesFor(type,color,rar){ const colorName=({W:'White',U:'Blue',B:'Black',R:'Red',G:'Green',C:'Colorless'})[color]; const kb={Creature:`${colorName} creature. When it enters, draw a card.`,Spell:`Instant spell. Target gets +2/+0 until end of turn.`,Artifact:`Non‑creature. Your spells cost 1 less to cast.`,Enchantment:`At upkeep, scry 1.`,Land:`Tap: Add one mana of ${colorName.toLowerCase()}.`,}; return kb[type]+((rar==='R'||rar==='M')?' (Powerful.)':''); }
+  const CARD_POOL = genCardPool();
+
+
+  const S = { players:8, packs:3, packSize:15, seatCount:8, packIndex:0, pickIndex:0, direction:+1, seats:[], tablePacks:[], running:false };
+
+
+  function readSetup(){ S.players=clamp(+$('#players').value||8,2,12); S.seatCount=S.players; S.packs=clamp(+$('#packs').value||3,1,6); S.packSize=clamp(+$('#packSize').value||15,5,20); }
+  $('#start').addEventListener('click', startDraft);
+  $('#reset').addEventListener('click', resetAll);
+  $('#skipBtn').addEventListener('click', ()=>userSkip());
+  document.addEventListener('keydown', e=>{ if(e.code==='Space'){ e.preventDefault(); const first=packArea.querySelector('.card button'); if(first) first.click(); }});
+
+  function resetAll(){ S.running=false; S.seats=[]; S.tablePacks=[]; S.packIndex=0; S.pickIndex=0; S.direction=+1; packArea.innerHTML=''; picksArea.innerHTML=''; emptyPack.style.display='block'; statusEl.textContent='Idle'; tableInfo.textContent='Table not started.'; logEl.textContent=''; log('Reset.'); }
+
+  function makePack(){ const rares=CARD_POOL.filter(c=>c.rarity==='R'); const mythics=CARD_POOL.filter(c=>c.rarity==='M'); const uncos=CARD_POOL.filter(c=>c.rarity==='U'); const comms=CARD_POOL.filter(c=>c.rarity==='C'); const pack=[]; pack.push(choice(Math.random()<0.125?mythics:rares)); for(let i=0;i<3;i++) pack.push(choice(uncos)); while(pack.length<S.packSize) pack.push(choice(comms)); for(let i=pack.length-1;i>0;i--){const j=rnd(i+1); [pack[i],pack[j]]=[pack[j],pack[i]]} return pack.map((c,idx)=>({...c,uid:`P${Date.now()}_${idx}_${Math.random().toString(36).slice(2)}`})); }
+  function setupSeats(){ S.seats=Array.from({length:S.seatCount},(_,i)=>({ isUser:i===0, pool:[], wish:new Set(i===0?[]:[choice(COLORS),choice(COLORS)]), pack:[] })); }
+  function createTablePacks(){ S.tablePacks=Array.from({length:S.seatCount},()=>makePack()); }
+
+  function startDraft(){ if(S.running){ log('Draft already running.'); return; } readSetup(); resetAll(); readSetup(); setupSeats(); createTablePacks(); S.running=true; S.packIndex=0; S.pickIndex=0; S.direction=+1; log(`Draft started with ${S.seatCount} players • ${S.packs} packs × ${S.packSize}`); renderTableInfo(); renderUserPack(); }
+  function renderTableInfo(){ const dir=S.direction===1?'Left':'Right'; tableInfo.innerHTML=`Pack <b>${S.packIndex+1}</b> / ${S.packs} • Pick <b>${S.pickIndex+1}</b> / ${S.packSize} — Passing: <b>${dir}</b>`; }
+  function renderUserPack(){ const pack=S.tablePacks[0]||[]; packArea.innerHTML=''; if(!pack.length){ emptyPack.style.display='block'; statusEl.textContent='Waiting…'; return; } emptyPack.style.display='none'; for(const c of pack){ packArea.appendChild(cardEl(c,()=>userPick(c.uid))); } statusEl.textContent=`Choose a card (${pack.length} in pack)`; }
+  function cardEl(card,onPick){ const el=document.createElement('div'); el.className='card'; el.innerHTML=`<div class="pad"><div class="rar ${card.rarity}">${card.rarity}</div><div class="name">${escapeHtml(card.name)}</div><div class="tag">${colorDot(card.color)} ${escapeHtml(card.type)}</div><div class="desc">${escapeHtml(card.text)}</div></div><footer><button>Pick</button></footer>`; el.querySelector('button').addEventListener('click', onPick); return el; }
+  function colorDot(c){ const map={W:'#f8f4d7',U:'#88c6ff',B:'#8e8e8e',R:'#ff8f88',G:'#9dff7a',C:'#d1e0ff'}; return `<span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:${map[c]};border:1px solid #2a2a2a"></span>`; }
+  function pushPickEl(card){ const el=document.createElement('div'); el.className='card'; el.innerHTML=`<div class="pad"><div class="rar ${card.rarity}">${card.rarity}</div><div class="name">${escapeHtml(card.name)}</div><div class="tag">${colorDot(card.color)} ${escapeHtml(card.type)}</div><div class="desc">${escapeHtml(card.text)}</div></div>`; picksArea.appendChild(el); }
+
+
+  const removeByUid=(arr,uid)=>{ const i=arr.findIndex(x=>x.uid===uid); return i>=0?arr.splice(i,1)[0]:null };
+  function userPick(uid){ if(!S.running) return; const picked=removeByUid(S.tablePacks[0],uid); if(!picked) return; S.seats[0].pool.push(picked); pushPickEl(picked); log(`You picked: ${picked.name}`); advanceTurn(); }
+  function userSkip(){ 
+    const pack=S.tablePacks[0]; if(!pack||!pack.length) return; const best=scorePackForSeat(pack,S.seats[0]).sort((a,b)=>b.score-a.score)[0]; if(best){ userPick(best.card.uid); }
+  }
+  function advanceTurn(){
+
+    for(let seat=1; seat<S.seatCount; seat++){
+      const pack=S.tablePacks[seat]; if(pack && pack.length){ const pick=botPick(S.seats[seat],pack); removeByUid(pack,pick.uid); S.seats[seat].pool.push(pick); }
+    }
+
+    const newPacks=Array(S.seatCount); for(let i=0;i<S.seatCount;i++){ const to=(i+S.direction+S.seatCount)%S.seatCount; newPacks[to]=S.tablePacks[i]; } S.tablePacks=newPacks;
+
+    S.pickIndex++; renderTableInfo();
+
+    const allEmpty=S.tablePacks.every(p=>!p||p.length===0);
+    if(allEmpty){ S.packIndex++; if(S.packIndex>=S.packs){ finishDraft(); return; } S.direction*=-1; S.pickIndex=0; createTablePacks(); log(`Opening Pack ${S.packIndex+1}. Passing ${S.direction===1?'Left':'Right'}.`); }
+    renderUserPack();
+  }
+
+  function finishDraft(){ S.running=false; renderUserPack(); emptyPack.style.display='block'; statusEl.textContent='Draft complete!'; log('Draft finished.'); }
+
+
+  function botPick(seat,pack){ const scored=scorePackForSeat(pack,seat); const noise=0.3; scored.forEach(s=> s.score *= (1 - noise/2) + Math.random()*noise); scored.sort((a,b)=>b.score-a.score); return scored[0].card; }
+  function scorePackForSeat(pack,seat){ const colorCounts=countColors(seat.pool); const prefer=seat.wish; return pack.map(card=>{ let s=rarityScore(card.rarity); if(prefer.has(card.color)) s+=2.0; s += (colorCounts[card.color]||0)*0.15; if(S.pickIndex<5 && card.type==='Creature') s+=0.5; return {card,score:s}; }); }
+  const rarityScore=r=> r==='M'?6 : r==='R'?4.5 : r==='U'?3 : 2;
+  function countColors(cards){ const m={}; for(const c of cards){ m[c.color]=(m[c.color]||0)+1 } return m; }
+
+  // init
+  resetAll();
+})();
+</script>
+</body>
+</html>
